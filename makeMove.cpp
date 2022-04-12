@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <vector>
 //link isValidMove()
+
+using namespace std;
 
 // vector.isempty
 bool makeMove(int board[][8], int position[], int player){
-  vector<int> flip_tiles = isValidMove(int board[][8], int position[], int player);
+  vector<vector<int>> flip_tiles = isValidMove(int board[][8], int position[], int player);
 
   if(flip_tiles.empty()){
     return false;
