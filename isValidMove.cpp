@@ -119,7 +119,9 @@ bool diagonalRightUpCheck(int board[][8], int position[], int player, vector < v
         return 1;
       }
       else{
-        vector<int> tiles = {position[0]-i, position[1]+i};
+        vector<int> tiles;
+        tiles.push_back(position[0]-i);
+        tiles.push_back(position[1]+i);
         flip_tiles.push_back(tiles);
       }
     }
@@ -137,7 +139,9 @@ bool diagonalLeftDownCheck(int board[][8], int position[], int player, vector < 
         return 1;
       }
       else{
-        vector<int> tiles = {position[0]+i, position[1]-i};
+        vector<int> tiles;
+        tiles.push_back(position[0]+i);
+        tiles.push_back(position[1]-i);
         flip_tiles.push_back(tiles);
       }
     }
@@ -155,7 +159,9 @@ bool diagonalRightDownCheck(int board[][8], int position[], int player, vector <
         return 1;
       }
       else{
-        vector<int> tiles = {position[0]+i, position[1]+i};
+        vector<int> tiles;
+        tiles.push_back(position[0]+i);
+        tiles.push_back(position[1]+i);
         flip_tiles.push_back(tiles);
       }
     }
