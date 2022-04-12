@@ -29,11 +29,12 @@ bool horizontalLeftCheck(vector < vector<int> > board, int position[], int playe
 }
 
 bool horizontalRightCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
-  if (position[1] <= 5) {
+  int size = board.size();
+  if (position[1] <= (size - 3)) {
     if ((board[position[0]][position[1]+1]) == player) {
         return 0;
     }
-    for (int i=position[1] + 1;i<=7; i++) {
+    for (int i=position[1] + 1;i<=(size - 1); i++) {
       if (board[position[0]][i] == player) {
         return 1;
       }
@@ -69,11 +70,12 @@ bool verticalUpwardCheck(vector < vector<int> > board, int position[], int playe
 }
 
 bool verticalDownwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
-  if (position[0] <= 5) {
+  int size = board.size();
+  if (position[0] <= (size - 3)) {
     if ((board[position[0]+1][position[1]]) == player) {
         return 0;
     }
-    for (int i=position[0] + 1;i<=7; i++) {
+    for (int i=position[0] + 1;i<=(size - 1); i++) {
       if (board[i][position[1]] == player) {
         return 1;
       }
@@ -110,7 +112,8 @@ bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int playe
 }
 
 bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
-  if (position[0] >= 2 && position[1] <= 5) {
+  int size = board.size();
+  if (position[0] >= 2 && position[1] <= (size - 3)) {
     if ((board[position[0]+1][position[1]-1]) == player) {
       return 0;
     }
@@ -130,11 +133,12 @@ bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int play
 }
 
 bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
-  if (position[0] <= 5 && position[1] >= 2) {
+  int size = board.size();
+  if (position[0] <= (size - 3) && position[1] >= 2) {
     if ((board[position[0]-1][position[1]+1]) == player) {
       return 0;
     }
-    for (int i= 7 - position[0]; i >= 1; i--) {
+    for (int i= (size - 1) - position[0]; i >= 1; i--) {
       if (board[position[0]+i][position[1]-i] == player) {
         return 1;
       }
@@ -150,11 +154,12 @@ bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int pla
 }
 
 bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
-  if (position[0] <= 5 && position[1] <= 5) {
+  int size = board.size();
+  if (position[0] <= (size - 3) && position[1] <= (size - 3)) {
     if ((board[position[0]+1][position[1]+1]) == player) {
       return 0;
     }
-    for (int i= 7 - position[0]; i >= 1; i--) {
+    for (int i= (size - 1) - position[0]; i >= 1; i--) {
       if (board[position[0]+i][position[1]+i] == player) {
         return 1;
       }

@@ -16,8 +16,8 @@ string WHITE = "\u25CF";
 string NONE = " ";
 string POSSIBLE = "\u2022";
 string LINEROW = "+---+---+---+---+---+---+---+---+";
-string NUMBER = "  1   2   3   4   5   6   7   8";
-string ALPHABET = "ABCDEFGH";
+string NUMBER = "  1   2   3   4   5   6   7   size";
+string ALPHABET = "ABCDEFGHIJKLMNOPQRST";
 
 
 // prereqs: ensure the board size value is even number
@@ -39,12 +39,13 @@ vector < vector<int> > boardInitalize(int size) {
 }
 
 void printBoard(vector < vector<int> > board) {
+  int size = board.size();
   int row = 0;
   string piece;
   cout << LINEROW << endl;
   
-  while (row != 8) {
-    for (int col=0; col < 8; col++) {
+  while (row != size) {
+    for (int col=0; col < size; col++) {
       if (board[row][col] == 0) {
         piece = NONE;
       } else if (board[row][col] == 1) {
@@ -67,13 +68,14 @@ void printBoard(vector < vector<int> > board) {
 }
 
 void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > validMovesArr) {
+  int size = board.size();
   int row = 0;
   string piece;
   cout << 
   cout << LINEROW << endl;
   
-  while (row != 8) {
-    for (int col=0; col < 8; col++) {
+  while (row != size) {
+    for (int col=0; col < size; col++) {
       if (board[row][col] == 0 && validMovesArr[row][col] != 0) {
         piece = POSSIBLE;
       } else if (board[row][col] == 0) {
@@ -98,13 +100,26 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
 }
 
 int countTotalPieces(vector < vector<int> > board, int player) {
+  int size = board.size();
   int counter = 0;
-  for (int row=0; row<8; row++) {
-    for (int col=0; col<8; col++) {
+  for (int row=0; row<size; row++) {
+    for (int col=0; col<size; col++) {
       if (board[row][col] == player) {
         counter++;
       }
     }
   }
   return counter;
+}
+
+bool boardEmpty(vector < vector<int> > board) {
+  int size = board.size();
+  for (int row=0; row<size; row++) {
+    for (int col=0; col<size; col++) {
+      if (board[row][col] == 0) {
+        return 1;
+      }
+    }
+  }
+  return 0;
 }
