@@ -173,7 +173,7 @@ bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int pl
 //        position: [row, col]
 //        player: 1: black, 2: white
 
-vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player) {
   //define tiles to flip global vector
   vector<vector<int> > flip_tiles;
 

@@ -1,47 +1,43 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <vector>
+#include <stdlib.h>
 
-// Finished Functions (require importing)
-bool isValidMove(int board[][8], int position[], int player);
+using namespace std;
 
-// Not Yet Finished Functions
-int calculateMoveFlips(int board[][8], int position);
-void makeMove(int board[][8], int position[], int player);
+vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player);
 
-// validMovesArr array shape int arr[8][8], 1 = validMove, 0 = invalidMove
-void listAllValidMoves(int board[][8], int validMovesArr[][8], int player) {
-  int counter = 0;
-  for (int row=0; row<8; row++) {
-    for (int col=0; col<8; col++) {
-      int position[2] = {row, col};
-      if (board[row][col] == 0 && isValidMove(board, position, player)) {
-        validMovesArr[row][col] = 1;
-        counter++;
+bool botMove(vector < vector<int> > board, vector < vector<int> > validMovesArr, int player) {
+  int size = board.size();
+  int max = 0;
+  int position [2] = {-1, -1};
+  for (int row = 0; row < size; row++) {
+    for (int col = 0; col < size; col++) {
+      if (validMovesArr[row][col] > max) {
+        max = validMovesArr[row][col];
+        position[0] = row;
+        position[1] = col;
+      }
+      
+      if (position[0] != -1 && position[1] != -1) {
+        //makeMove(board, position, player);
+        return 1;
       }
     }
   }
-  return;
+  return 0;
 }
 
-void botMoveDecision(int board[][8], int validMovesArr[][8], int player) {
-  int flips[64] = { 0 };
-
-  for (int row=0; row<8; row++) {
-    for (int col=0; col<8; col++) {
-      if (validMovesArr[row][col] == 1) {
-        flips[(row * 8) + col] = calculateMoveFlips(board, board[row][col]);
+void findAllPossibleMoves(vector < vector<int> > board, int player, vector < vector<int> > validMovesArr) {
+  int size = board.size(); 
+  for (int row=0; row<size; row++) {
+    for (int col=0; col<size; col++) {
+      int position[2] = {row, col};
+      vector < vector<int> > moves = isValidMove(board, position, player);
+      if (!moves.empty()) {
+        validMovesArr[row][col] = moves.size();
       }
     }
   }
-
-  int max = 0;
-  for (int i = 0; i < 64; i++) {
-    if (flips[i] > max) {
-      max = flips[i];
-    }
-  }
-  
-  int position[2] = {(max / 8), (max % 8)};
-  makeMove(board, position, player);
 }
