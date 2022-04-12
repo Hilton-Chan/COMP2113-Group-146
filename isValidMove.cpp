@@ -7,7 +7,7 @@ using namespace std;
 
 //row = vertical, col = horizontal
 //checks for x direction of where tile is placed
-bool horizontalLeftCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool horizontalLeftCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[1] >= 2) {
     if ((board[position[0]][position[1]-1]) == player) { 
         return 0;
@@ -28,7 +28,7 @@ bool horizontalLeftCheck(int board[][8], int position[], int player, vector < ve
   return 0;
 }
 
-bool horizontalRightCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool horizontalRightCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[1] <= 5) {
     if ((board[position[0]][position[1]+1]) == player) {
         return 0;
@@ -48,7 +48,7 @@ bool horizontalRightCheck(int board[][8], int position[], int player, vector < v
   return 0;
 }
 
-bool verticalUpwardCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool verticalUpwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] >= 2) {
     if ((board[position[0]-1][position[1]]) == player) {
         return 0;
@@ -68,7 +68,7 @@ bool verticalUpwardCheck(int board[][8], int position[], int player, vector < ve
   return 0;
 }
 
-bool verticalDownwardCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool verticalDownwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] <= 5) {
     if ((board[position[0]+1][position[1]]) == player) {
         return 0;
@@ -88,7 +88,7 @@ bool verticalDownwardCheck(int board[][8], int position[], int player, vector < 
   return 0;
 }
 
-bool diagonalLeftUpCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] >= 2 && position[1] >= 2) {
     if ((board[position[0]-1][position[1]-1]) == player) {
       return 0;
@@ -109,7 +109,7 @@ bool diagonalLeftUpCheck(int board[][8], int position[], int player, vector < ve
   return 0;
 }
 
-bool diagonalRightUpCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] >= 2 && position[1] <= 5) {
     if ((board[position[0]+1][position[1]-1]) == player) {
       return 0;
@@ -129,7 +129,7 @@ bool diagonalRightUpCheck(int board[][8], int position[], int player, vector < v
   return 0;
 }
 
-bool diagonalLeftDownCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] <= 5 && position[1] >= 2) {
     if ((board[position[0]-1][position[1]+1]) == player) {
       return 0;
@@ -149,7 +149,7 @@ bool diagonalLeftDownCheck(int board[][8], int position[], int player, vector < 
   return 0;
 }
 
-bool diagonalRightDownCheck(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   if (position[0] <= 5 && position[1] <= 5) {
     if ((board[position[0]+1][position[1]+1]) == player) {
       return 0;
@@ -173,14 +173,18 @@ bool diagonalRightDownCheck(int board[][8], int position[], int player, vector <
 //        position: [row, col]
 //        player: 1: black, 2: white
 
-bool isValidMove(int board[][8], int position[], int player, vector < vector<int> > flip_tiles) {
+vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
   //define tiles to flip global vector
   vector<vector<int> > flip_tiles;
 
-  if (horizontalLeftCheck(board, position, player, flip_tiles) || horizontalRightCheck(board, position, player, flip_tiles) || verticalUpwardCheck(board, position, player, flip_tiles) || 
-    verticalDownwardCheck(board, position, player, flip_tiles) || diagonalLeftUpCheck(board, position, player, flip_tiles) || diagonalRightUpCheck(board, position, player, flip_tiles) || 
-    diagonalLeftDownCheck(board, position, player, flip_tiles) || diagonalRightDownCheck(board, position, player, flip_tiles)) {
-      return 1;
-  }
-  return 0;
+  horizontalLeftCheck(board, position, player, flip_tiles); 
+  horizontalRightCheck(board, position, player, flip_tiles);
+  verticalUpwardCheck(board, position, player, flip_tiles);
+  verticalDownwardCheck(board, position, player, flip_tiles);
+  diagonalLeftUpCheck(board, position, player, flip_tiles);
+  diagonalRightUpCheck(board, position, player, flip_tiles);
+  diagonalLeftDownCheck(board, position, player, flip_tiles);
+  diagonalRightDownCheck(board, position, player, flip_tiles);
+
+  return flip_tiles;
 }

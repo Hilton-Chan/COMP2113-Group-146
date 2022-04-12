@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -17,7 +19,26 @@ string LINEROW = "+---+---+---+---+---+---+---+---+";
 string NUMBER = "  1   2   3   4   5   6   7   8";
 string ALPHABET = "ABCDEFGH";
 
-void printBoard(int board[][8]) {
+
+// prereqs: ensure the board size value is even number
+//          ensure the size is larger or equal to 6 
+vector < vector<int> > boardInitalize(int size) {
+  vector < vector<int> > board;
+  
+  vector<vector<int> > board(
+    size,
+    vector<int>(size));
+
+  int start_tile_player_1 = (size / 2) - 1;
+  board[start_tile_player_1][start_tile_player_1] = 1;
+  board[start_tile_player_1][start_tile_player_1 + 1] = 2;
+  board[start_tile_player_1 + 1][start_tile_player_1] = 2;
+  board[start_tile_player_1 + 1][start_tile_player_1 + 1] = 1;
+  
+  return board;
+}
+
+void printBoard(vector < vector<int> > board) {
   int row = 0;
   string piece;
   cout << LINEROW << endl;
@@ -45,9 +66,26 @@ void printBoard(int board[][8]) {
   }
 }
 
-// validMovesArr[64] = (row * 8) + (col % 8)
+vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles);
 
-void showPossibleMoves(int board[][8], int validMovesArr[]) {
+void findAllPossibleMoves(vector < vector<int> > board, int player, vector < vector<int> > validMovesArr) {
+  vector < vector<int> > dump;
+
+  for (int row=0; row<8; row++) {
+    for (int col=0; col<8; col++) {
+      int position[2] = {row, col};
+      vector < vector<int> > moves = isValidMove(board, position, player, dump);
+      if (!moves.empty()) {
+        vector<int> tiles;
+        tiles.push_back(row);
+        tiles.push_back(col);
+        validMovesArr.push_back(tiles);
+      }
+    }
+  }
+}
+
+void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > validMovesArr) {
   int row = 0;
   string piece;
   cout << 
@@ -55,7 +93,7 @@ void showPossibleMoves(int board[][8], int validMovesArr[]) {
   
   while (row != 8) {
     for (int col=0; col < 8; col++) {
-      if (board[row][col] == 0 && validMovesArr[(row * 8 + col % 8)] == 1) {
+      if (board[row][col] == 0 && validMovesArr[row][col] == 1) {
         piece = POSSIBLE;
       } else if (board[row][col] == 0) {
         piece = NONE;
@@ -78,7 +116,7 @@ void showPossibleMoves(int board[][8], int validMovesArr[]) {
   }
 }
 
-int countTotalPieces(int board[][8], int player) {
+int countTotalPieces(vector < vector<int> > board, int player) {
   int counter = 0;
   for (int row=0; row<8; row++) {
     for (int col=0; col<8; col++) {
