@@ -33,15 +33,15 @@ bool isNumber(string s) {
 }
 
 
-void printPage(vector < vector<int> > board) {
+void printPage(vector < vector<int> > board, int player, bool hint) {
   system("CLS");
-  // add UI: black vs white pieces, hotkey legend, hints enabled/disabled, player turn
+  scoreBoard(board, player, hint);
   printBoard(board);
 }
 
-void printPageWithHints(vector < vector<int> > board, int player) {
+void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
   system("CLS");
-  // add UI: specify player (if vs player) e.g. Hints for Player X enabled/disabled, at top right of screen
+  scoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
 }
@@ -87,13 +87,11 @@ int main() {
   system("CLS");
   boardInitalize(size);
   // add Scoreboard over here and additional UI related stuff (e.g. save file & undo indicating key)
-  // black vs white pieces, hotkey legend, hints for player 1/2 enabled/disabled, player turn
-  // need: player_turn, 
+  // black vs white pieces, hotkey legend, hints for player 1/2 enabled, player turn 
   printBoard(board);
   
   bool show_hint_flag = 0;
   bool bot_next_flag = 0;
-  // print who's turn it is right now over here
 
   while (boardEmpty(board)) {
     string userInput;
@@ -103,11 +101,11 @@ int main() {
     } else if (userInput == "u") { // decide which key
         // undo move
     } else if (userInput == "h" && show_hint_flag == 0) { // show move key
-        printPageWithHints(board, player_turn);
         show_hint_flag = 1;
+        printPageWithHints(board, player_turn, show_hint_flag);
     } else if (userInput == "h" && show_hint_flag == 1) {
-        printBoard(board);
         show_hint_flag = 0;
+        printPage(board, player_turn, show_hint_flag);
     } else if (validMoveInput(userInput)) {
         int row = alphabet.find(userInput[0]);
         int col = stoi(userInput.substr(1));
