@@ -98,11 +98,6 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
   }
 }
 
-//pop last element of board nested vector
-void undoMove(){
-
-}
-
 int countTotalPieces(vector < vector<int> > board, int player) {
   int size = board.size();
   int counter = 0;
