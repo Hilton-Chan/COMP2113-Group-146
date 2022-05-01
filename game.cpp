@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -64,30 +65,50 @@ int main() {
   string sizeInput;
   // standard Othello board size 8x8
   int size = 8;
+  boardInitalize(size);
 
   string player_choice;
   int player_turn;
   // Pick Vs. Bot or Player
   // chcp 65001 - Display utf characters
   printTitle();
-  cout << "Playing against Bot, or Player vs Player?\n";
-  cout << "Input 1 for Bot, 2 for Player:";
-  while(player_choice != "1" && player_choice != "2"){
-    cin >> player_choice;
-    if (player_choice == "1") {
-      player_turn = -1;
-    } else if(player_choice == "2") {
-      player_turn = 1;
+  string loadFlag;
+  cout << "Loading from saved game file?\n";
+  cout << "Input 'Y' to load, or 'N' to play a new game: ";
+  while(loadFlag != "Y" && loadFlag != "N"){
+    cin >> loadFlag;
+    if(loadFlag == "Y"){
+      loadFile(board, player_turn);
+    }
+    else if(loadFlag == "N"){
+      break;
     }
     else{
-      cout << cout << "Input 1 for Bot, 2 for Player:";
+      cout << "Input 'Y' to load, or 'N' to play a new game: ";
     }
   }
 
+  // If playing a new game, user picks to play against Bot or Player
+  if(loadFlag == "N"){
+    cout << "Playing against Bot, or Player vs Player?\n";
+    cout << "Input '1' for Bot, '2' for Player:";
+    while(player_choice != "1" && player_choice != "2"){
+      cin >> player_choice;
+      if (player_choice == "1") {
+        player_turn = -1;
+      } else if(player_choice == "2") {
+        player_turn = 1;
+      }
+      else{
+        cout << "Input 1 for Bot, 2 for Player:";
+      }
+    }
+  }
+  
   system("CLS");
   bool show_hint_flag = 0;
   bool bot_next_flag = 0;
-  boardInitalize(size);
+  bool undoFlag = 0;
   printScoreBoard(board, player_turn, show_hint_flag);
   printBoard(board);
 
@@ -95,10 +116,10 @@ int main() {
   while (boardEmpty(board)) {
     string userInput;
     cin >> userInput;
-    if (userInput == "s") { // decide which key. Need to implement same hotkey to go back to board
-        // save file over here
-    } else if (userInput == "u") { // decide which key
-        // undo move
+    if (userInput == "s") {
+        saveFile(board, player_turn);
+    } else if (userInput == "l") {
+        loadFile(board, player_turn);
     } else if (userInput == "h" && show_hint_flag == 0) { // show move key
         show_hint_flag = 1;
         printPageWithHints(board, player_turn, show_hint_flag);
@@ -149,10 +170,10 @@ int main() {
         }
       }
     }
-    
-    cin >> userInput; 
   }
 
   // Game Ends here
-  // Print out scoreboard and asks if player wants to replay again
+  // Print out scoreboard and asks if player wants to replay again (?)
+  system("CLS");
+  printFinalScore(board, player_turn);
 }
