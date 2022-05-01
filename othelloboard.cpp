@@ -71,7 +71,6 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
   int size = board.size();
   int row = 0;
   string piece;
-  cout << 
   cout << LINEROW << endl;
   
   while (row != size) {
