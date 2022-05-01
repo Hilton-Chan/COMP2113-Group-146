@@ -25,7 +25,7 @@ void printTitle(){
 
 // Prints description of hotkeys, player turn, displays if hints are enabled/disabled
 // and tallies of total white and black pieces on the current board
-void scoreBoard(vector < vector<int> > board, int player_turn, bool show_hint_flag){
+void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hint_flag){
   cout << vertical << " HOTKEYS:" << "\n";
   cout << vertical << " \"s\" - save/load files\n";
   cout << vertical << " \"u\" - undo last move\n";

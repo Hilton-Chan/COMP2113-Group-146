@@ -35,13 +35,13 @@ bool isNumber(string s) {
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
   system("CLS");
-  scoreBoard(board, player, hint);
+  printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
   system("CLS");
-  scoreBoard(board, player, hint);
+  printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
 }
@@ -85,13 +85,12 @@ int main() {
   }
 
   system("CLS");
-  boardInitalize(size);
-  // add Scoreboard over here and additional UI related stuff (e.g. save file & undo indicating key)
-  // black vs white pieces, hotkey legend, hints for player 1/2 enabled, player turn 
-  printBoard(board);
-  
   bool show_hint_flag = 0;
   bool bot_next_flag = 0;
+  boardInitalize(size);
+  printScoreBoard(board, player_turn, show_hint_flag);
+  printBoard(board);
+
 
   while (boardEmpty(board)) {
     string userInput;
