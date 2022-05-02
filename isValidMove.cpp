@@ -52,7 +52,7 @@ bool horizontalRightCheck(vector < vector<int> > board, int position[], int play
       }
       else{
         tiles.push_back(position[0]);
-        tiles.push_back(position[i]);
+        tiles.push_back(i);
       }
     }
   }
@@ -99,7 +99,7 @@ bool verticalDownwardCheck(vector < vector<int> > board, int position[], int pla
         flip_tiles.push_back(tiles);
         return 1;
       }
-      else if(board[position[i]][1] == 0) {
+      else if(board[i][position[1]] == 0) {
         break;
       }
       else{
