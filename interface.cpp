@@ -76,14 +76,13 @@ void saveFile(vector < vector<int> > board, int player_turn){
   }
 
   fout.close();
-  cout << "File saved successfully\n";
 }
 
 // reading board state from file
 void loadFile(vector < vector<int> > &board, int &player_turn){
   ifstream fin("gamefile.txt");
   if(fin.fail()){
-    cout << "Error in file opening!";
+    cout << "Error in file opening! Please restart the game.";
     exit(1);
   }
 
@@ -95,7 +94,6 @@ void loadFile(vector < vector<int> > &board, int &player_turn){
   }
 
   fin.close();
-  cout << "File loaded successfully\n";
 }
 
 int countTotalPieces(vector < vector<int> > board, int player) {
