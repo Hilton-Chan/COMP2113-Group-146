@@ -68,7 +68,7 @@ bool verticalUpwardCheck(vector < vector<int> > board, int position[], int playe
     }
     tiles.push_back(position[0] - 1);
     tiles.push_back(position[1]);
-    for (int i=position[0] - 2;i<=0; i--) {
+    for (int i=position[0] - 2;i>=0; i--) {
       if (board[i][position[1]] == player) {
         flip_tiles.push_back(tiles);
         return 1;
