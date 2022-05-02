@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <fstream>
+#include <iomanip>
 #include "interface.h"
 
 using namespace std;
@@ -57,7 +58,7 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
 
   int WHITE_UI, BLACK_UI;
   for(int i = 0; i < 8; i++){
-    for(int j = 0; i < 8; i++){
+    for(int j = 0; j < 8; j++){
       if(board[i][j] == 1){
         WHITE_UI++;
       }
@@ -66,7 +67,7 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
       }
     }
   }
-  cout << "WHITE_UI " << WHITE_UI << ": x" << WHITE_UI << " " << divider << " BLACK_UI "<< BLACK_UI << ": x" << BLACK_UI << "\n";
+  cout << "WHITE " << WHITE_UI << ": x" << WHITE_UI << " " << divider << " BLACK "<< BLACK_UI << ": x" << BLACK_UI << "\n";
 }
 
 // writing board state into file

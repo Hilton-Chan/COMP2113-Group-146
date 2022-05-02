@@ -54,11 +54,10 @@ bool validMoveInput(string input) {
 }
 
 int main() {
-  vector < vector<int> > board;
   string sizeInput;
   // standard Othello board size 8x8
   int size = 8;
-  boardInitalize(size);
+  vector < vector<int> > board = boardInitalize(size);
 
   string player_choice;
   int player_turn;

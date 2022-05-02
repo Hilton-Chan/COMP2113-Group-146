@@ -16,8 +16,8 @@ string BLACK = "\u25CB";
 string WHITE = "\u25CF";
 string NONE = " ";
 string POSSIBLE = "\u2022";
-string LINEROW = "+---+---+---+---+---+---+---+---+";
-string NUMBER = "  1   2   3   4   5   6   7   8";
+string LINEROW = "  +---+---+---+---+---+---+---+---+";
+string NUMBER = "   1   2   3   4   5   6   7   8";
 string ALPHABET = "ABCDEFGH";
 
 
@@ -41,6 +41,7 @@ void printBoard(vector < vector<int> > board) {
   int size = board.size();
   int row = 0;
   string piece;
+  cout << NUMBER << endl;
   cout << LINEROW << endl;
   
   while (row != size) {
@@ -70,6 +71,7 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
   int size = board.size();
   int row = 0;
   string piece;
+  cout << NUMBER << endl;
   cout << LINEROW << endl;
   
   while (row != size) {
@@ -84,7 +86,7 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
         piece = WHITE;
       }
       if (col == 0) {
-        cout << ALPHABET[row] << "| " << piece << " | ";
+        cout << ALPHABET[row] << " | " << piece << " | ";
       } else if (col == 7) {
         cout << piece << " | " << endl;
       } else {
