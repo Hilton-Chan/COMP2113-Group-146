@@ -8,9 +8,9 @@
 
 using namespace std;
 
-void makeMove(vector < vector<int> > &board, int position[], int player) {
+void makeMove(vector < vector<int> > &board, int row, int col, int player) {
+  int position[2] = {row, col};
   vector<vector<int> > flip_tiles = isValidMove(board, position, player);
-
   board[position[0]][position[1]] = player;
   
   for (int i = 0; i < flip_tiles.size(); i++) {
@@ -42,7 +42,7 @@ void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<
     bot_position[1] = (validPositionList[0] % 8);
   }
   
-  makeMove(board, bot_position, 2);
+  makeMove(board, bot_position[0], bot_position[1], 2);
 }
 
 vector < vector<int> > findAllPossibleMoves(vector < vector<int> > board, int player) {

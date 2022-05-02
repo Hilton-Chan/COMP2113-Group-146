@@ -28,13 +28,13 @@ bool isNumber(string s) {
 
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
-  system("clear");
+  system("cls");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
-  system("clear");
+  system("cls");
   printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
@@ -104,14 +104,13 @@ int main() {
         if (flip_tiles.empty()) {
             cout << "Invalid Move" << endl;
         } else {
-            makeMove(board, position, 1);
+            makeMove(board, row, col, 1);
             bot_next_flag = 1;
           }
           flip_tiles.clear();
-        }
-    } 
+        } 
 
-    if (bot_next_flag && player_turn == -1) {
+    if (bot_next_flag && player_turn == 1) {
       vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
       if (!noPossibleMoves(botMoves)) {
           int bot_position[2] = { };
@@ -123,18 +122,7 @@ int main() {
       bot_next_flag = 0;
       botMoves.clear();
     }
-    if (player_turn == 1) {
-      vector < vector<int> > nextMoves = findAllPossibleMoves(board, player_turn);
-      if (noPossibleMoves(nextMoves)) {
-        cout << "No Possible Moves can be made by Player " << player_turn << endl;
-        if (player_turn == 1) {
-            player_turn = 2;
-        } else {
-            player_turn = 1;
-        }
-      }
-    }
-
+  }
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
   system("cls");

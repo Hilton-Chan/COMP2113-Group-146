@@ -35,39 +35,26 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
   cout << vertical << " \"h\" - display/hide hints on board\n";
   cout << setw(40) << setfill('-') << "\n";
 
-  // If playing against bot, display text should only be for Player 1
-  if(player_turn == -1){
-    cout << "PLayer 1's Turn. ";
-  }
-  else{
-    cout << "Player " << player_turn << "'s Turn. ";
-  }
-  
-  if(player_turn == -1 && show_hint_flag == 1){
+  cout << "Player 1's Turn (Black). ";
+  if(show_hint_flag == 1){
     cout << "Hints enabled for Player 1\n";
   }
-  else if(player_turn == -1 && show_hint_flag == 0){
+  else if(show_hint_flag == 0){
     cout << "Hints disabled for Player 1\n";
   }
-  else if(show_hint_flag == 1){
-    cout << "Hints enabled for Player " << player_turn << "\n";
-  }
-  else if(show_hint_flag == 0){
-    cout << "Hints disabled for Player " << player_turn << "\n";
-  }
 
-  int WHITE_UI, BLACK_UI;
+  int white_counter = 0, black_counter = 0;
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
-      if(board[i][j] == 1){
-        WHITE_UI++;
+      if(board[i][j] == 2){
+        white_counter++;
       }
-      else if(board[i][j] == 2){
-        BLACK_UI++;
+      else if(board[i][j] == 1){
+        black_counter++;
       }
     }
   }
-  cout << "WHITE " << WHITE_UI << ": x" << WHITE_UI << " " << divider << " BLACK "<< BLACK_UI << ": x" << BLACK_UI << "\n";
+  cout << "WHITE " << WHITE_UI << ": x" << white_counter << " " << divider << " BLACK "<< BLACK_UI << ": x" << black_counter << "\n";
 }
 
 // writing board state into file
@@ -132,7 +119,7 @@ void printFinalScore(vector < vector<int> > board, int player_turn){
   cout << vertical << " FINAL SCORE " << vertical << "\n";
   cout << bottom_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << bottom_right_corner << "\n";
 
-  if(player_turn == -1){
+  if(player_turn == 1){
     cout << "Player 1 - " << BLACK_UI << " points. Bot - " << WHITE_UI << " points.\n";
     if(WHITE_UI > BLACK_UI){
     cout << "Bot beat Player 1 by " << WHITE_UI - BLACK_UI << " points.\n";
@@ -144,22 +131,10 @@ void printFinalScore(vector < vector<int> > board, int player_turn){
       cout << "Player 1 and Bot tied.\n";
     }
   }
-  else{
-    cout << "Player 1 - " << BLACK_UI << " points. Player 2 - " << WHITE_UI << " points.\n";
-    if(WHITE_UI > BLACK_UI){
-    cout << "Player 2 beat Player 1 by " << WHITE_UI - BLACK_UI << " points.\n";
-    }
-    else if(BLACK_UI > WHITE_UI){
-      cout << "Player 1 beat Player 2 by" << BLACK_UI - WHITE_UI << " points.\n";
-    }
-    else{
-      cout << "Player 1 and Player 2 tied.\n";
-    }
-  }
+}
 
   //cout << "Would you like to play again? (Y/N)\n";
   //cin >> replay;
   //while(replay != 'Y' && replay != 'N'){
   //  cout >> "Invalid choice. Input 'Y' or 'N': ";
   //}
-}
