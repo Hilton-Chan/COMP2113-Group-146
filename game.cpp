@@ -92,13 +92,15 @@ int main() {
   while (boardEmpty(board)) {
 
     vector < vector<int> > player1moves = findAllPossibleMoves(board, 1);
-    vector < vector<int> > player2moves = findAllPossibleMoves(board, 2);
-    if (noPossibleMoves(player1moves) && noPossibleMoves(player2moves)) {
+    vector < vector<int> > botmoves = findAllPossibleMoves(board, 2);
+    if (noPossibleMoves(player1moves) && noPossibleMoves(botmoves)) {
       cout << "No possible moves can be made from both sides. Game ends" << endl;
       break;
     } else if (noPossibleMoves(player1moves)) {
       skip_player_flag = 1;
       cout << "No possible moves can be made by player. Bot's Turn" << endl;
+    } else if (noPossibleMoves(botmoves)) {
+      cout << "No possible moves can be made by Bot. Player's Turn" << endl;
     }
 
     if (!skip_player_flag) {
@@ -187,7 +189,6 @@ int main() {
           bot_move[1] = bot_position[1];
       } else {
           cout << "No possible moves can be made by bot. Player's Turn" << endl;
-          // add more text
       }
       botMoves.clear();
     }
