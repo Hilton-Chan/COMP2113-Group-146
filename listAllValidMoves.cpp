@@ -22,7 +22,8 @@ void makeMove(vector < vector<int> > &board, int row, int col, int player) {
 
 void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<int> > validMovesArr, int player) {
   int size = board.size();
-  vector<int> validPositionList(size*size);
+  vector<int> validPositionList;
+  validPositionList.clear();
   for (int row=0; row<size; row++) {
     for (int col=0; col<size; col++) {
       if (validMovesArr[row][col] != 0) {
@@ -33,10 +34,12 @@ void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<
   }
 
   int validsize = validPositionList.size();
+  cout << "valid size" << validPositionList.size() << endl;
   if (validsize != 1) {
     int randomMove = rand() % validsize;
-    bot_position[0] = (randomMove / 8);
-    bot_position[1] = (randomMove % 8);
+    cout << randomMove << " " << validPositionList[randomMove] << endl;
+    bot_position[0] = validPositionList[randomMove] / 8;
+    bot_position[1] = validPositionList[randomMove] % 8;
   } else {
     bot_position[0] = (validPositionList[0] / 8);
     bot_position[1] = (validPositionList[0] % 8);
