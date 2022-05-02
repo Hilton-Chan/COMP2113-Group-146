@@ -13,7 +13,6 @@ void makeMove(vector < vector<int> > board, int position[], int player) {
 
   board[position[0]][position[1]] = player;
   
-  int row, col;
   for (int i = 0; i < flip_tiles.size(); i++) {
     for (int j = 0; j < flip_tiles[i].size(); j += 2) {
       board[flip_tiles[i][j]][flip_tiles[i][j + 1]] = player;

@@ -28,13 +28,13 @@ bool isNumber(string s) {
 
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
-  system("CLS");
+  system("clear");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
-  system("CLS");
+  system("clear");
   printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
@@ -83,7 +83,7 @@ int main() {
   // If playing a new game, user picks to play against Bot or Player
   if(loadFlag == "N"){
     cout << "Playing against Bot, or Player vs Player?\n";
-    cout << "Input '1' for Bot, '2' for Player:";
+    cout << "Input '1' for Bot, '2' for Player: ";
     while(player_choice != "1" && player_choice != "2"){
       cin >> player_choice;
       if (player_choice == "1") {
@@ -92,12 +92,12 @@ int main() {
         player_turn = 1;
       }
       else{
-        cout << "Input 1 for Bot, 2 for Player:";
+        cout << "Input 1 for Bot, 2 for Player: ";
       }
     }
   }
   
-  system("CLS");
+  system("clear");
   bool show_hint_flag = 0;
   bool bot_next_flag = 0;
   bool undoFlag = 0;
@@ -167,6 +167,6 @@ int main() {
 
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
-  system("CLS");
+  system("clear");
   printFinalScore(board, player_turn);
 }
