@@ -34,10 +34,8 @@ void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<
   }
 
   int validsize = validPositionList.size();
-  cout << "valid size" << validPositionList.size() << endl;
   if (validsize != 1) {
     int randomMove = rand() % validsize;
-    cout << randomMove << " " << validPositionList[randomMove] << endl;
     bot_position[0] = validPositionList[randomMove] / 8;
     bot_position[1] = validPositionList[randomMove] % 8;
   } else {

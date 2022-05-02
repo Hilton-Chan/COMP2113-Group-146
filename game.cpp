@@ -78,13 +78,24 @@ int main() {
 
   bool show_hint_flag = 0;
   bool undoFlag = 0;
+  bool invalid_move_flag = 0;
+  bool bot_flag = 0;
+  int bot_move[2] ={};
 
+  system("cls");
   while (boardEmpty(board)) {
-    system("cls");
     printScoreBoard(board, player_turn, show_hint_flag);
     printBoard(board);
+
+    if(invalid_move_flag){
+      cout << "Invalid move. Please input a move from A1 to H8:\n";
+    }
+    else if(bot_flag){
+      cout << "\nBot played " << alphabet[bot_move[0]] << bot_move[1] + 1 << "\n";
+    }
     string userInput;
     cin >> userInput;
+
     if (userInput == "s") {
         saveFile(board, player_turn);
     } else if (userInput == "l") {
@@ -101,22 +112,32 @@ int main() {
         int position[2] = {row, col};
         vector<vector<int> > flip_tiles = isValidMove(board, position, player_turn);
         if (flip_tiles.empty()) {
-            cout << "Invalid Move" << endl;
+            invalid_move_flag = 1;
         } else {
             makeMove(board, row, col, 1);
             flip_tiles.clear();
+            invalid_move_flag = 0;
+            cout << "\nPlayer 1 played " << alphabet[row] << col + 1 << ":\n";
+            printBoard(board);
+            cout << "\n";
         }
     } 
 
-    vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
-    if (!noPossibleMoves(botMoves)) {
-        int bot_position[2] = { };
-        botMove(board, bot_position, botMoves, 2);
-    } else {
-        cout << "No Possible Moves can be made by Bot" << endl;
-        // add more text
+    if(invalid_move_flag == 0){
+      vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
+      if (!noPossibleMoves(botMoves)) {
+          int bot_position[2] = { };
+          botMove(board, bot_position, botMoves, 2);
+
+          bot_flag = 1;
+          bot_move[0] = bot_position[0];
+          bot_move[1] = bot_position[1];
+      } else {
+          cout << "No Possible Moves can be made by Bot" << endl;
+          // add more text
+      }
+      botMoves.clear();
     }
-    botMoves.clear();
   }
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
