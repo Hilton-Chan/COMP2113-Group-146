@@ -102,6 +102,7 @@ int main() {
     else if(load_flag){
       cout << "File loaded successfully\n";
       load_flag = 0;
+      bot_flag = 0;
     }
 
     // display text if user has inputted an invalid move
