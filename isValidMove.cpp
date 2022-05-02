@@ -8,21 +8,31 @@ using namespace std;
 
 //row = vertical, col = horizontal
 //checks for x direction of where tile is placed
-bool horizontalLeftCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool horizontalLeftCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   if (position[1] >= 2) {
     if ((board[position[0]][position[1]-1]) == player || (board[position[0]][position[1]-1]) == 0) { 
         return 0;
     }
     for (int i=position[1] - 2;i>=0; i--) {
       if (board[position[0]][i] == player) {
+        flip_tiles.push_back(tiles);
         return 1;
+      }
+      else if(board[position[0]][i] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0]);
+        tiles.push_back(i);
       }
     }
   }
   return 0;
 }
 
-bool horizontalRightCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool horizontalRightCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   int size = board.size();
   if (position[1] <= (size - 3)) {
     if ((board[position[0]][position[1]+1]) == player || (board[position[0]][position[1]+1]) == 0) {
@@ -30,28 +40,47 @@ bool horizontalRightCheck(vector < vector<int> > board, int position[], int play
     }
     for (int i=position[1] + 2;i<=(size - 1); i++) {
       if (board[position[0]][i] == player) {
+        flip_tiles.push_back(tiles);
         return 1;
+      }
+      else if(board[position[0]][i] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0]);
+        tiles.push_back(position[i]);
       }
     }
   }
   return 0;
 }
 
-bool verticalUpwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool verticalUpwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
+  
   if (position[0] >= 2) {
     if ((board[position[0]-1][position[1]]) == player || (board[position[0]-1][position[1]]) == 0) {
         return 0;
     }
     for (int i=position[0] - 2;i<=0; i--) {
       if (board[i][position[1]] == player) {
+        flip_tiles.push_back(tiles);
         return 1;
+      }
+      else if(board[position[i]][1] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(i);
+        tiles.push_back(position[1]);
       }
     }
   }
   return 0;
 }
 
-bool verticalDownwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool verticalDownwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   int size = board.size();
   if (position[0] <= (size - 3)) {
     if ((board[position[0]+1][position[1]]) == player || (board[position[0]+1][position[1]]) == 0) {
@@ -61,12 +90,20 @@ bool verticalDownwardCheck(vector < vector<int> > board, int position[], int pla
       if (board[i][position[1]] == player) {
         return 1;
       }
+      else if(board[position[i]][1] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(i);
+        tiles.push_back(position[1]);
+      }
     }
   }
   return 0;
 }
 
-bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   if (position[0] >= 2 && position[1] >= 2) {
     if ((board[position[0]-1][position[1]-1]) == player || (board[position[0]-1][position[1]-1]) == 0) {
       return 0;
@@ -77,13 +114,21 @@ bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int playe
       if (board[position[0] - incrementor][position[1] - incrementor] == player) {
         return 1;
       }
+      else if(board[position[0] - incrementor][position[1] - incrementor] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0] - incrementor);
+        tiles.push_back(position[1] - incrementor);
+      }
       incrementor++;
     }
   }
   return 0;
 }
 
-bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   int size = board.size();
   if (position[0] >= 2 && position[1] <= (size - 3)) {
     if ((board[position[0]-1][position[1]+1]) == player || (board[position[0]-1][position[1]+1]) == 0) {
@@ -94,13 +139,21 @@ bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int play
       if (board[position[0] - incrementor][position[1] + incrementor] == player) {
         return 1;
       }
+      else if(board[position[0] - incrementor][position[1] + incrementor] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0] - incrementor);
+        tiles.push_back(position[1] + incrementor);
+      }
       incrementor++;
     }
   }
   return 0;
 }
 
-bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   int size = board.size();
   if (position[0] <= (size - 3) && position[1] >= 2) {
     if ((board[position[0]+1][position[1]-1]) == player || (board[position[0]+1][position[1]-1]) == 0) {
@@ -112,13 +165,21 @@ bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int pla
       if (board[position[0] + incrementor][position[1] - incrementor] == player) {
         return 1;
       }
+      else if(board[position[0] + incrementor][position[1] - incrementor] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0] + incrementor);
+        tiles.push_back(position[1] - incrementor);
+      }
       incrementor++;
     }
   }
   return 0;
 }
 
-bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > flip_tiles) {
+bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
+  vector < vector<int> > tiles;
   int size = board.size();
   if (position[0] <= (size - 3) && position[1] <= (size - 3)) {
     if ((board[position[0]+1][position[1]+1]) == player || (board[position[0]+1][position[1]+1]) == 0) {
@@ -129,6 +190,13 @@ bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int pl
     while (position[0] != (size - 3) && position[1] != (size - 3)) {
       if (board[position[0] + incrementor][position[1] + incrementor] == player) {
         return 1;
+      }
+      else if(board[position[0] + incrementor][position[1] + incrementor] == 0) {
+        break;
+      }
+      else{
+        tiles.push_back(position[0] + incrementor);
+        tiles.push_back(position[1] + incrementor);
       }
       incrementor++;
     }

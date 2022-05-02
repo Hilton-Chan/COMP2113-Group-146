@@ -120,7 +120,7 @@ int main() {
         printPage(board, player_turn, show_hint_flag);
     } else if (validMoveInput(userInput)) {
         int row = alphabet.find(userInput[0]);
-        int col = stoi(userInput.substr(1));
+        int col = stoi(userInput.substr(1)) - 1;
         int position[2] = {row, col};
         vector<vector<int> > flip_tiles = isValidMove(board, position, player_turn);
         if (flip_tiles.empty()) {
