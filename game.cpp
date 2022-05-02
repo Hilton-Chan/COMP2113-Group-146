@@ -77,7 +77,6 @@ int main() {
   }
 
   bool show_hint_flag = 0;
-  bool bot_next_flag = 0;
   bool undoFlag = 0;
 
   while (boardEmpty(board)) {
@@ -105,23 +104,19 @@ int main() {
             cout << "Invalid Move" << endl;
         } else {
             makeMove(board, row, col, 1);
-            bot_next_flag = 1;
-          }
-          flip_tiles.clear();
-        } 
+            flip_tiles.clear();
+        }
+    } 
 
-    if (bot_next_flag && player_turn == 1) {
-      vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
-      if (!noPossibleMoves(botMoves)) {
-          int bot_position[2] = { };
-          botMove(board, bot_position, botMoves, 2);
-      } else {
-          cout << "No Possible Moves can be made by Bot" << endl;
-          // add more text
-      }
-      bot_next_flag = 0;
-      botMoves.clear();
+    vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
+    if (!noPossibleMoves(botMoves)) {
+        int bot_position[2] = { };
+        botMove(board, bot_position, botMoves, 2);
+    } else {
+        cout << "No Possible Moves can be made by Bot" << endl;
+        // add more text
     }
+    botMoves.clear();
   }
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
