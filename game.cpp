@@ -28,11 +28,13 @@ bool isNumber(string s) {
 
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
+  system("clear");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
+  system("clear");
   printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
@@ -77,12 +79,15 @@ int main() {
   bool save_flag = 0;
   bool load_flag = 0;
   bool hint_flag = 0;
+  bool log_flag = 0;
   bool invalid_move_flag = 0;
   bool show_hint_flag = 0;
   bool skip_player_flag = 0;
   bool bot_flag = 0;
   int bot_move[2] ={};
-
+  string log = "\nPrevious player moves:\n";
+  int log_counter = 1;
+  
   system("clear");
   while (boardEmpty(board)) {
 
@@ -115,6 +120,9 @@ int main() {
         bot_flag = 0;
       }
 
+      if(log_flag){
+        cout << log;
+      }
       // display text if user has inputted an invalid move
       if(invalid_move_flag){
         cout << "Invalid move. Please input a move from A1 to H8:\n";
@@ -139,7 +147,9 @@ int main() {
       } else if (userInput == "h" && show_hint_flag == 1) {
           show_hint_flag = 0;
           hint_flag = 1;
-      } else if (validMoveInput(userInput)) {
+      } else if (userInput == "p"){
+          log_flag = 1;
+      }  else if (validMoveInput(userInput)) {
           int row = alphabet.find(userInput[0]);
           int col = stoi(userInput.substr(1)) - 1;
           int position[2] = {row, col};
@@ -149,7 +159,10 @@ int main() {
           } else {
               makeMove(board, row, col, 1);
               flip_tiles.clear();
-              cout << "\nPlayer 1 played " << alphabet[row] << col + 1 << ":\n";
+              // adding player moves to log
+              log += to_string(log_counter) + ": Player 1 played " + alphabet[row] + to_string(col + 1) + "\n";
+              log_counter++;
+              log_flag = 0;
               printBoard(board);
               cout << "\n";
           }
@@ -160,7 +173,7 @@ int main() {
     }
     
     // If no hotkeys have been pressed, and the input is a valid move, let the Bot make its move
-    if(!save_flag && !load_flag && !invalid_move_flag && !hint_flag){
+    if(!save_flag && !load_flag && !hint_flag && !log_flag && !invalid_move_flag){
       if (skip_player_flag) {
         skip_player_flag = 0;
       }

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include <stdlib.h>
+#include <time.h>
 #include "isValidMove.h"
 #include "listAllValidMoves.h"
 
@@ -21,6 +22,7 @@ void makeMove(vector < vector<int> > &board, int row, int col, int player) {
 }
 
 void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<int> > validMovesArr, int player) {
+  srand(time(NULL));
   int size = board.size();
   vector<int> validPositionList;
   validPositionList.clear();
