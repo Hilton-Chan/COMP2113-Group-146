@@ -54,15 +54,11 @@ bool validMoveInput(string input) {
 }
 
 int main() {
-  string sizeInput;
   // standard Othello board size 8x8
   int size = 8;
   vector < vector<int> > board = boardInitalize(size);
+  int player_turn = 1;
 
-  string player_choice;
-  int player_turn;
-  // Pick Vs. Bot or Player
-  // chcp 65001 - Display utf characters
   printTitle();
   string loadFlag;
   cout << "Loading from saved game file?\n";
@@ -80,32 +76,14 @@ int main() {
     }
   }
 
-  // If playing a new game, user picks to play against Bot or Player
-  if(loadFlag == "N"){
-    cout << "Playing against Bot, or Player vs Player?\n";
-    cout << "Input '1' for Bot, '2' for Player: ";
-    while(player_choice != "1" && player_choice != "2"){
-      cin >> player_choice;
-      if (player_choice == "1") {
-        player_turn = -1;
-      } else if(player_choice == "2") {
-        player_turn = 1;
-      }
-      else{
-        cout << "Input 1 for Bot, 2 for Player: ";
-      }
-    }
-  }
-  
-  system("clear");
   bool show_hint_flag = 0;
   bool bot_next_flag = 0;
   bool undoFlag = 0;
-  printScoreBoard(board, player_turn, show_hint_flag);
-  printBoard(board);
-
 
   while (boardEmpty(board)) {
+    system("cls");
+    printScoreBoard(board, player_turn, show_hint_flag);
+    printBoard(board);
     string userInput;
     cin >> userInput;
     if (userInput == "s") {
@@ -126,17 +104,10 @@ int main() {
         if (flip_tiles.empty()) {
             cout << "Invalid Move" << endl;
         } else {
-            if (player_turn == 1) {
-                makeMove(board, position, player_turn);
-                player_turn = 2;
-            } else if (player_turn == 2) {
-                makeMove(board, position, player_turn);
-                player_turn = 1;
-            } else {
-                makeMove(board, position, 1);
-                bot_next_flag = 1;
-            }
-            flip_tiles.clear();
+            makeMove(board, position, 1);
+            bot_next_flag = 1;
+          }
+          flip_tiles.clear();
         }
     } 
 
@@ -152,7 +123,7 @@ int main() {
       bot_next_flag = 0;
       botMoves.clear();
     }
-    if (player_turn == 1 || player_turn == 2) {
+    if (player_turn == 1) {
       vector < vector<int> > nextMoves = findAllPossibleMoves(board, player_turn);
       if (noPossibleMoves(nextMoves)) {
         cout << "No Possible Moves can be made by Player " << player_turn << endl;
@@ -163,10 +134,9 @@ int main() {
         }
       }
     }
-  }
 
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
-  system("clear");
+  system("cls");
   printFinalScore(board, player_turn);
 }

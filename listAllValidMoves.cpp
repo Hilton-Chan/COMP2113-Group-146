@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void makeMove(vector < vector<int> > board, int position[], int player) {
+void makeMove(vector < vector<int> > &board, int position[], int player) {
   vector<vector<int> > flip_tiles = isValidMove(board, position, player);
 
   board[position[0]][position[1]] = player;
@@ -20,7 +20,7 @@ void makeMove(vector < vector<int> > board, int position[], int player) {
   }
 }
 
-void botMove(vector < vector<int> > board, int bot_position[] ,vector < vector<int> > validMovesArr, int player) {
+void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<int> > validMovesArr, int player) {
   int size = board.size();
   vector<int> validPositionList(size*size);
   for (int row=0; row<size; row++) {

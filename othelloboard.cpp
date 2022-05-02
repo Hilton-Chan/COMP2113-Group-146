@@ -17,7 +17,7 @@ string WHITE = "\u25CF";
 string NONE = " ";
 string POSSIBLE = "\u2022";
 string LINEROW = "  +---+---+---+---+---+---+---+---+";
-string NUMBER = "   1   2   3   4   5   6   7   8";
+string NUMBER = "    1   2   3   4   5   6   7   8";
 string ALPHABET = "ABCDEFGH";
 
 
@@ -54,7 +54,7 @@ void printBoard(vector < vector<int> > board) {
         piece = WHITE;
       }
       if (col == 0) {
-        cout << ALPHABET[row] << "| " << piece << " | ";
+        cout << ALPHABET[row] << " | " << piece << " | ";
       } else if (col == 7) {
         cout << piece << " | " << endl;
       } else {

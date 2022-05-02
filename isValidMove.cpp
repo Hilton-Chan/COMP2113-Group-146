@@ -240,6 +240,5 @@ vector < vector<int> > isValidMove(vector < vector<int> > board, int position[],
   diagonalLeftDownCheck(board, position, player, flip_tiles);
   diagonalRightDownCheck(board, position, player, flip_tiles);
 
-  cout << (flip_tiles.size()) << endl;
   return flip_tiles;
 }
