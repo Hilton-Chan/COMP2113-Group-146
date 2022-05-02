@@ -5,21 +5,14 @@
 #include <stdlib.h>
 #include <string>
 #include <fstream>
+#include "isValidMove.h"
+#include "listAllValidMoves.h"
+#include "othelloboard.h"
+#include "interface.h"
 
 using namespace std;
 
 const string alphabet = "ABCDEFGH";
-
-
-bool boardEmpty(vector < vector<int> > board);
-vector < vector<int> > boardInitalize(int size);
-void printBoard(vector < vector<int> > board);
-void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > validMovesArr);
-vector < vector<int> > findAllPossibleMoves(vector < vector<int> > board, int player);
-vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player);
-void makeMove(vector < vector<int> > board, int position[], int player);
-int* botMove(vector < vector<int> > board, vector < vector<int> > validMovesArr, int player);
-bool noPossibleMoves(vector < vector<int> > validMovesArr);
 
 // True/false values should be swapped
 // Also, isdigit will always be false because we are passing a string?
@@ -151,7 +144,8 @@ int main() {
     if (bot_next_flag && player_turn == -1) {
       vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
       if (!noPossibleMoves(botMoves)) {
-          int* bot_position = botMove(board, botMoves, 2);
+          int bot_position[2] = { };
+          botMove(board, bot_position, botMoves, 2);
       } else {
           cout << "No Possible Moves can be made by Bot" << endl;
           // add more text

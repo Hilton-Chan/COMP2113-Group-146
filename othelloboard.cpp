@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include <stdlib.h>
+#include "othelloboard.h"
 
 using namespace std;
 
@@ -16,15 +17,13 @@ string WHITE = "\u25CF";
 string NONE = " ";
 string POSSIBLE = "\u2022";
 string LINEROW = "+---+---+---+---+---+---+---+---+";
-string NUMBER = "  1   2   3   4   5   6   7   size";
-string ALPHABET = "ABCDEFGHIJKLMNOPQRST";
+string NUMBER = "  1   2   3   4   5   6   7   8";
+string ALPHABET = "ABCDEFGH";
 
 
 // prereqs: ensure the board size value is even number
 //          ensure the size is larger or equal to 6 
-vector < vector<int> > boardInitalize(int size) {
-  vector < vector<int> > board;
-  
+vector < vector<int> > boardInitalize(int size) {  
   vector<vector<int> > board(
     size,
     vector<int>(size));
@@ -49,9 +48,9 @@ void printBoard(vector < vector<int> > board) {
       if (board[row][col] == 0) {
         piece = NONE;
       } else if (board[row][col] == 1) {
-        piece = WHITE;
-      } else {
         piece = BLACK;
+      } else {
+        piece = WHITE;
       }
       if (col == 0) {
         cout << ALPHABET[row] << "| " << piece << " | ";
@@ -80,9 +79,9 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
       } else if (board[row][col] == 0) {
         piece = NONE;
       } else if (board[row][col] == 1) {
-        piece = WHITE;
-      } else {
         piece = BLACK;
+      } else {
+        piece = WHITE;
       }
       if (col == 0) {
         cout << ALPHABET[row] << "| " << piece << " | ";
@@ -96,19 +95,6 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
     cout << LINEROW << endl;
     row++;
   }
-}
-
-int countTotalPieces(vector < vector<int> > board, int player) {
-  int size = board.size();
-  int counter = 0;
-  for (int row=0; row<size; row++) {
-    for (int col=0; col<size; col++) {
-      if (board[row][col] == player) {
-        counter++;
-      }
-    }
-  }
-  return counter;
 }
 
 bool boardEmpty(vector < vector<int> > board) {

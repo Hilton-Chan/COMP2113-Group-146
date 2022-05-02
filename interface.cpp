@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <fstream>
+#include "interface.h"
 
 using namespace std;
 string upper_left_corner = "\u2554";
@@ -14,17 +15,17 @@ string horizontal = "\u2550";
 string vertical = "\u2551";
 string divider = "\u2503";
 
-string BLACK = "\u25CB";
-string WHITE = "\u25CF";
+string BLACK_UI = "\u25CB";
+string WHITE_UI = "\u25CF";
 
 void printTitle(){
   cout << upper_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << upper_right_corner << "\n";
-  cout << vertical << " OTHELLO " << BLACK << WHITE << vertical << "\n";
+  cout << vertical << " OTHELLO " << BLACK_UI << WHITE_UI << vertical << "\n";
   cout << bottom_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << bottom_right_corner << "\n";
 }
 
 // Prints description of hotkeys, player turn, displays if hints are enabled/disabled
-// and tallies of total white and black pieces on the current board
+// and tallies of total WHITE_UI and BLACK_UI pieces on the current board
 void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hint_flag){
   cout << vertical << " HOTKEYS:" << "\n";
   cout << vertical << " \"s\" - save game file\n";
@@ -54,18 +55,18 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
     cout << "Hints disabled for Player " << player_turn << "\n";
   }
 
-  int white, black;
+  int WHITE_UI, BLACK_UI;
   for(int i = 0; i < 8; i++){
     for(int j = 0; i < 8; i++){
       if(board[i][j] == 1){
-        white++;
+        WHITE_UI++;
       }
       else if(board[i][j] == 2){
-        black++;
+        BLACK_UI++;
       }
     }
   }
-  cout << "White " << WHITE << ": x" << white << " " << divider << " Black "<< BLACK << ": x" << black << "\n";
+  cout << "WHITE_UI " << WHITE_UI << ": x" << WHITE_UI << " " << divider << " BLACK_UI "<< BLACK_UI << ": x" << BLACK_UI << "\n";
 }
 
 // writing board state into file
@@ -79,7 +80,7 @@ void saveFile(vector < vector<int> > board, int player_turn){
   // writing player_turn as first line;
   fout << player_turn << "\n";
   // writing out each line of board into the file
-  for(int i = 0; i < 8 < i++){
+  for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
       fout << board[i][j] << " ";
     }
@@ -99,7 +100,7 @@ void loadFile(vector < vector<int> > &board, int &player_turn){
   }
 
   fin >> player_turn;
-  for(int i = 0; i < 8 < i++){
+  for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
       fin >> board[i][j];
     }
@@ -109,42 +110,46 @@ void loadFile(vector < vector<int> > &board, int &player_turn){
   cout << "File loaded successfully\n";
 }
 
-void printFinalScore(vector < vector<int> > board, int player_turn){
-  int white, black;
-  for(int i = 0; i < 8; i++){
-    for(int j = 0; i < 8; i++){
-      if(board[i][j] == 1){
-        white++;
-      }
-      else if(board[i][j] == 2){
-        black++;
+int countTotalPieces(vector < vector<int> > board, int player) {
+  int size = board.size();
+  int counter = 0;
+  for (int row=0; row<size; row++) {
+    for (int col=0; col<size; col++) {
+      if (board[row][col] == player) {
+        counter++;
       }
     }
   }
+  return counter;
+}
+
+void printFinalScore(vector < vector<int> > board, int player_turn){
+  int WHITE_UI = countTotalPieces(board, 2);
+  int BLACK_UI = countTotalPieces(board, 1);
 
   cout << upper_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << upper_right_corner << "\n";
   cout << vertical << " FINAL SCORE " << vertical << "\n";
   cout << bottom_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << bottom_right_corner << "\n";
 
   if(player_turn == -1){
-    cout << "Player 1 - " << black << " points. Bot - " << white << " points.\n";
-    if(white > black){
-    cout << "Bot beat Player 1 by " << white - black << " points.\n";
+    cout << "Player 1 - " << BLACK_UI << " points. Bot - " << WHITE_UI << " points.\n";
+    if(WHITE_UI > BLACK_UI){
+    cout << "Bot beat Player 1 by " << WHITE_UI - BLACK_UI << " points.\n";
     }
-    else if(black > white){
-      cout << "Player 1 beat the Bot by" << black - white << " points.\n";
+    else if(BLACK_UI > WHITE_UI){
+      cout << "Player 1 beat the Bot by" << BLACK_UI - WHITE_UI << " points.\n";
     }
     else{
       cout << "Player 1 and Bot tied.\n";
     }
   }
   else{
-    cout << "Player 1 - " << black << " points. Player 2 - " << white << " points.\n";
-    if(white > black){
-    cout << "Player 2 beat Player 1 by " << white - black << " points.\n";
+    cout << "Player 1 - " << BLACK_UI << " points. Player 2 - " << WHITE_UI << " points.\n";
+    if(WHITE_UI > BLACK_UI){
+    cout << "Player 2 beat Player 1 by " << WHITE_UI - BLACK_UI << " points.\n";
     }
-    else if(black > white){
-      cout << "Player 1 beat Player 2 by" << black - white << " points.\n";
+    else if(BLACK_UI > WHITE_UI){
+      cout << "Player 1 beat Player 2 by" << BLACK_UI - WHITE_UI << " points.\n";
     }
     else{
       cout << "Player 1 and Player 2 tied.\n";

@@ -2,6 +2,7 @@
 #include <string>
 #include <stdio.h>
 #include <vector>
+#include "isValidMove.h"
 
 using namespace std;
 
