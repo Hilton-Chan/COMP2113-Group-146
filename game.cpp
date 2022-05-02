@@ -28,13 +28,11 @@ bool isNumber(string s) {
 
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
-  system("clear");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
-  system("clear");
   printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
