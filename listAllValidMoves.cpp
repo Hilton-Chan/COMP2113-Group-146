@@ -52,11 +52,13 @@ vector < vector<int> > findAllPossibleMoves(vector < vector<int> > board, int pl
   for (int row=0; row<size; row++) {
     for (int col=0; col<size; col++) {
       int position[2] = {row, col};
-      vector < vector<int> > moves = isValidMove(board, position, player);
-      if (!moves.empty()) {
-        validMovesArr[row][col] = moves.size();
-      } else {
-        validMovesArr[row][col] = 0;
+      if (board[row][col] == 0) {
+        vector < vector<int> > moves = isValidMove(board, position, player);
+        if (!moves.empty()) {
+          validMovesArr[row][col] = moves.size();
+        } else {
+          validMovesArr[row][col] = 0;
+        }
       }
     }
   }

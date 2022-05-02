@@ -28,13 +28,13 @@ bool isNumber(string s) {
 
 
 void printPage(vector < vector<int> > board, int player, bool hint) {
-  system("cls");
+  system("clear");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
-  system("cls");
+  system("clear");
   printScoreBoard(board, player, hint);
   vector < vector<int> > validMovesArr = findAllPossibleMoves(board, player);
   showPossibleMoves(board, validMovesArr);
@@ -80,21 +80,19 @@ int main() {
   bool load_flag = 0;
   bool hint_flag = 0;
   bool invalid_move_flag = 0;
-  
   bool show_hint_flag = 0;
 
   bool bot_flag = 0;
   int bot_move[2] ={};
 
-  system("cls");
+  system("clear");
   while (boardEmpty(board)) {
-    if(hint_flag){
+    hint_flag = 0;
+    if(show_hint_flag){
       printPageWithHints(board, player_turn, show_hint_flag);
-      hint_flag = 0;
     }
     else{
       printPage(board, player_turn, show_hint_flag);
-      hint_flag = 0;
     }
 
     if(save_flag){
@@ -144,10 +142,13 @@ int main() {
             printBoard(board);
             cout << "\n";
         }
-    } 
+    } else {
+      cout << "Invalid Input. Please input a move from A1 to H8:\n";
+      invalid_move_flag = 1;
+    }
 
     // If no hotkeys have been pressed, and the input is a valid move, let the Bot make its move
-    if(save_flag == 0 && load_flag == 0 && hint_flag == 0 && invalid_move_flag == 0){
+    if(!save_flag && !load_flag && !invalid_move_flag && !hint_flag){
       vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
       if (!noPossibleMoves(botMoves)) {
           int bot_position[2] = { };
@@ -165,6 +166,6 @@ int main() {
   }
   // Game Ends here
   // Print out scoreboard and asks if player wants to replay again (?)
-  system("cls");
+  system("clear");
   printFinalScore(board, player_turn);
 }

@@ -22,7 +22,7 @@ bool horizontalLeftCheck(vector < vector<int> > board, int position[], int playe
         return 1;
       }
       else if(board[position[0]][i] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(position[0]);
@@ -48,7 +48,7 @@ bool horizontalRightCheck(vector < vector<int> > board, int position[], int play
         return 1;
       }
       else if(board[position[0]][i] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(position[0]);
@@ -74,7 +74,7 @@ bool verticalUpwardCheck(vector < vector<int> > board, int position[], int playe
         return 1;
       }
       else if(board[i][position[1]] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(i);
@@ -100,7 +100,7 @@ bool verticalDownwardCheck(vector < vector<int> > board, int position[], int pla
         return 1;
       }
       else if(board[i][position[1]] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(i);
@@ -121,13 +121,13 @@ bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int playe
     tiles.push_back(position[0] - 1);
     tiles.push_back(position[1] - 1);
     int incrementor = 2;
-    while ((position[0] - incrementor) != 0 && (position[1] - incrementor) != 0) {
+    while ((position[0] - incrementor) >= 0 && (position[1] - incrementor) >= 0) {
       if (board[position[0] - incrementor][position[1] - incrementor] == player) {
         flip_tiles.push_back(tiles);
         return 1;
       }
       else if(board[position[0] - incrementor][position[1] - incrementor] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(position[0] - incrementor);
@@ -149,13 +149,13 @@ bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int play
     tiles.push_back(position[0] - 1);
     tiles.push_back(position[1] + 1);
     int incrementor = 2;
-    while ((position[0] - incrementor) != 0 && (position[1] + incrementor) != (size - 3)) {
+    while ((position[0] - incrementor) >= 0 && (position[1] + incrementor) <= (size - 1)) {
       if (board[position[0] - incrementor][position[1] + incrementor] == player) {
         flip_tiles.push_back(tiles);        
         return 1;
       }
       else if(board[position[0] - incrementor][position[1] + incrementor] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(position[0] - incrementor);
@@ -177,13 +177,13 @@ bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int pla
     tiles.push_back(position[0] + 1);
     tiles.push_back(position[1] - 1);
     int incrementor = 2;
-    while ((position[0] + incrementor) != (size - 3) && (position[1] - incrementor) != 0) {
+    while ((position[0] + incrementor) <= (size - 1) && (position[1] - incrementor) >= 0) {
       if (board[position[0] + incrementor][position[1] - incrementor] == player) {
         flip_tiles.push_back(tiles);        
         return 1;
       }
       else if(board[position[0] + incrementor][position[1] - incrementor] == 0) {
-        break;
+        return 0;
       }
       else{
         tiles.push_back(position[0] + incrementor);
@@ -205,13 +205,13 @@ bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int pl
     tiles.push_back(position[0] + 1);
     tiles.push_back(position[1] + 1);
     int incrementor = 2;
-    while ((position[0] + incrementor) != (size - 3) && (position[1] + incrementor) != (size - 3)) {
+    while ((position[0] + incrementor) <= (size - 1) && (position[1] + incrementor) <= (size - 1)) {
       if (board[position[0] + incrementor][position[1] + incrementor] == player) {
         flip_tiles.push_back(tiles);        
         return 1;
       }
-      else if(board[position[0] + incrementor][position[1] + incrementor] == 0) {
-        break;
+      else if (board[position[0] + incrementor][position[1] + incrementor] == 0) {
+        return 0;
       }
       else{
         tiles.push_back(position[0] + incrementor);
