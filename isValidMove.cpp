@@ -96,6 +96,7 @@ bool verticalDownwardCheck(vector < vector<int> > board, int position[], int pla
     tiles.push_back(position[1] + 1);
     for (int i=position[0] + 2;i<=(size - 1); i++) {
       if (board[i][position[1]] == player) {
+        flip_tiles.push_back(tiles);
         return 1;
       }
       else if(board[position[i]][1] == 0) {
@@ -122,6 +123,7 @@ bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int playe
     int incrementor = 2;
     while (position[0] != 0 && position[1] != 0) {
       if (board[position[0] - incrementor][position[1] - incrementor] == player) {
+        flip_tiles.push_back(tiles);
         return 1;
       }
       else if(board[position[0] - incrementor][position[1] - incrementor] == 0) {
@@ -149,6 +151,7 @@ bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int play
     int incrementor = 2;
     while (position[0] != 0 && position[1] != (size - 3)) {
       if (board[position[0] - incrementor][position[1] + incrementor] == player) {
+        flip_tiles.push_back(tiles);        
         return 1;
       }
       else if(board[position[0] - incrementor][position[1] + incrementor] == 0) {
@@ -176,6 +179,7 @@ bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int pla
     int incrementor = 2;
     while (position[0] != (size - 3) && position[1] != 0) {
       if (board[position[0] + incrementor][position[1] - incrementor] == player) {
+        flip_tiles.push_back(tiles);        
         return 1;
       }
       else if(board[position[0] + incrementor][position[1] - incrementor] == 0) {
@@ -203,6 +207,7 @@ bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int pl
     int incrementor = 2;
     while (position[0] != (size - 3) && position[1] != (size - 3)) {
       if (board[position[0] + incrementor][position[1] + incrementor] == player) {
+        flip_tiles.push_back(tiles);        
         return 1;
       }
       else if(board[position[0] + incrementor][position[1] + incrementor] == 0) {
