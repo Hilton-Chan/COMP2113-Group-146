@@ -67,7 +67,6 @@ int main() {
     cin >> loadFlag;
     if(loadFlag == "Y"){
       loadFile(board, player_turn);
-      load_flag = 1;
     }
     else if(loadFlag == "N"){
       break;
