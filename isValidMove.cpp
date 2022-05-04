@@ -6,8 +6,8 @@
 
 using namespace std;
 
-//row = vertical, col = horizontal
-//checks for x direction of where tile is placed
+// Returns true if there are pieces to flip in the left horizontal direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool horizontalLeftCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   if (position[1] >= 2) {
@@ -33,6 +33,8 @@ bool horizontalLeftCheck(vector < vector<int> > board, int position[], int playe
   return 0;
 }
 
+// Returns true if there are pieces to flip in the right horizontal direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool horizontalRightCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   int size = board.size();
@@ -59,6 +61,8 @@ bool horizontalRightCheck(vector < vector<int> > board, int position[], int play
   return 0;
 }
 
+// Returns true if there are pieces to flip in the upward vertical direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool verticalUpwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   
@@ -85,6 +89,8 @@ bool verticalUpwardCheck(vector < vector<int> > board, int position[], int playe
   return 0;
 }
 
+// Returns true if there are pieces to flip in the downward vertical direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool verticalDownwardCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   int size = board.size();
@@ -111,6 +117,8 @@ bool verticalDownwardCheck(vector < vector<int> > board, int position[], int pla
   return 0;
 }
 
+// Returns true if there are pieces to flip in the diagonal upper left (north-west) direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   if (position[0] >= 2 && position[1] >= 2) {
@@ -139,6 +147,8 @@ bool diagonalLeftUpCheck(vector < vector<int> > board, int position[], int playe
   return 0;
 }
 
+// Returns true if there are pieces to flip in the diagonal upper right (north-east) direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   int size = board.size();
@@ -167,6 +177,8 @@ bool diagonalRightUpCheck(vector < vector<int> > board, int position[], int play
   return 0;
 }
 
+// Returns true if there are pieces to flip in the diagonal lower left (south-west) direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   int size = board.size();
@@ -195,6 +207,8 @@ bool diagonalLeftDownCheck(vector < vector<int> > board, int position[], int pla
   return 0;
 }
 
+// Returns true if there are pieces to flip in the diagonal lower right (south-east) direction 
+// Stores the position of tiles flipped inside flip_tiles variable if the move is valid
 bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int player, vector < vector<int> > &flip_tiles) {
   vector<int> tiles;
   int size = board.size();
@@ -223,10 +237,7 @@ bool diagonalRightDownCheck(vector < vector<int> > board, int position[], int pl
   return 0;
 }
 
-// input: board[row][col]
-//        position: [row, col]
-//        player: 1: black, 2: white
-
+// Returns a vector of integer vectors variable, which stores the tiles flipped from the above functions
 vector < vector<int> > isValidMove(vector < vector<int> > board, int position[], int player) {
   //define tiles to flip global vector
   vector<vector<int> > flip_tiles;

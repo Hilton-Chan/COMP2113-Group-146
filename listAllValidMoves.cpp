@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Updates the board by placing the tile selected by player and also flip the tiles casued by the placement
 void makeMove(vector < vector<int> > &board, int row, int col, int player) {
   int position[2] = {row, col};
   vector<vector<int> > flip_tiles = isValidMove(board, position, player);
@@ -21,6 +22,7 @@ void makeMove(vector < vector<int> > &board, int row, int col, int player) {
   }
 }
 
+// Updates the board by placing the tile randomly selected by bot out of all possible moves and also flip the tiles casued by the placement
 void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<int> > validMovesArr, int player) {
   srand(time(NULL));
   int size = board.size();
@@ -48,6 +50,7 @@ void botMove(vector < vector<int> > &board, int bot_position[] ,vector < vector<
   makeMove(board, bot_position[0], bot_position[1], 2);
 }
 
+// Returns the same dimension size vector as board with each element showing how many tiles can be flipped at that position
 vector < vector<int> > findAllPossibleMoves(vector < vector<int> > board, int player) {
   int size = board.size();
   vector < vector<int> > validMovesArr(size, vector<int> (size));
@@ -67,6 +70,7 @@ vector < vector<int> > findAllPossibleMoves(vector < vector<int> > board, int pl
   return validMovesArr;
 }
 
+// Check if there are no possible moves for every single position that can be made 
 bool noPossibleMoves(vector < vector<int> > validMovesArr) {
   int size = validMovesArr.size(); 
   for (int row=0; row<size; row++) {

@@ -162,7 +162,7 @@ int main() {
               makeMove(board, row, col, 1);
               flip_tiles.clear();
               // adding player moves to log
-              log += to_string(log_counter) + ": Player 1 played " + alphabet[row] + to_string(col + 1) + "\n";
+              log += to_string(log_counter) + ": Player played " + alphabet[row] + to_string(col + 1) + "\n";
               log_counter++;
               log_flag = 0;
               printBoard(board);
