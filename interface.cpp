@@ -32,7 +32,6 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
   cout << vertical << " HOTKEYS:" << "\n";
   cout << vertical << " \"s\" - save game file\n";
   cout << vertical << " \"l\" - load recently saved game file\n";
-  cout << vertical << " \"u\" - undo last move\n";
   cout << vertical << " \"h\" - display/hide hints on board\n";
   cout << vertical << " \"p\" - view log of previous moves\n";
   cout << setw(40) << setfill('-') << "\n";

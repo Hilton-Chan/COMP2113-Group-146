@@ -37,6 +37,7 @@ vector < vector<int> > boardInitalize(int size) {
   return board;
 }
 
+// prints the board
 void printBoard(vector < vector<int> > board) {
   int size = board.size();
   int row = 0;
@@ -67,6 +68,7 @@ void printBoard(vector < vector<int> > board) {
   }
 }
 
+// returns the board with possible moves of the player marked
 void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > validMovesArr) {
   int size = board.size();
   int row = 0;
@@ -99,6 +101,7 @@ void showPossibleMoves(vector < vector<int> > board, vector < vector<int> > vali
   }
 }
 
+// returns true if there is still an empty square on the board
 bool boardEmpty(vector < vector<int> > board) {
   int size = board.size();
   for (int row=0; row<size; row++) {

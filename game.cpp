@@ -59,6 +59,7 @@ int main() {
   int player_turn = 1;
 
   printTitle();
+  // asks if the player wants to load a game file, or start a new game
   string loadFlag;
   cout << "Loading from saved game file?\n";
   cout << "Input 'Y' to load, or 'N' to play a new game: ";
@@ -66,6 +67,7 @@ int main() {
     cin >> loadFlag;
     if(loadFlag == "Y"){
       loadFile(board, player_turn);
+      load_flag = 1;
     }
     else if(loadFlag == "N"){
       break;
@@ -99,6 +101,8 @@ int main() {
 
     vector < vector<int> > player1moves = findAllPossibleMoves(board, 1);
     vector < vector<int> > botmoves = findAllPossibleMoves(board, 2);
+    // display text if no possible moves can be made from both sides, or either the player
+    // or bot have no possible moves
     if (noPossibleMoves(player1moves) && noPossibleMoves(botmoves)) {
       cout << "No possible moves can be made from both sides. Game ends" << endl;
       break;
@@ -109,19 +113,20 @@ int main() {
       cout << "No possible moves can be made by Bot. Player's Turn" << endl;
     }
 
-    // skip the players turn if they have no possible move
+    // skip the player's turn if they have no possible moves
     if (!skip_player_flag) {
-
+      // display text if player successfully saved their file
       if(save_flag){
         cout << "File saved successfully\n";
         save_flag = 0;
       }
+      // display text if successfully loaded their file
       else if(load_flag){
         cout << "File loaded successfully\n";
         load_flag = 0;
         bot_flag = 0;
       }
-
+      // display log of previous player moves, if hotkey was pressed
       if(log_flag){
         cout << log;
       }
@@ -130,34 +135,42 @@ int main() {
         cout << "Invalid move. Please input a move from A1 to H8:\n";
         invalid_move_flag = 0;
       }
-      // display bot move if the player has made a move
+      // display bot move if the player has already made a move
       else if(bot_flag){
         cout << "\nBot played " << alphabet[bot_move[0]] << bot_move[1] + 1 << "\n";
       }
       string userInput;
       cin >> userInput;
 
+      // hotkey "s" - save game file
       if (userInput == "s") {
           saveFile(board, player_turn);
           save_flag = 1;
+      // hotkey "l" - load game file
       } else if (userInput == "l") {
           loadFile(board, player_turn);
           load_flag = 1;
+      // hotkey "h" - display hints on board
       } else if (userInput == "h" && show_hint_flag == 0) { // show move key
           show_hint_flag = 1;
           hint_flag = 1;
+      // hotkey "h" - hide hints on board
       } else if (userInput == "h" && show_hint_flag == 1) {
           show_hint_flag = 0;
           hint_flag = 1;
+      // hotkey "p" - view log of previous moves
       } else if (userInput == "p"){
           log_flag = 1;
+      // checks if userInput fits format of A1 - H8
       }  else if (validMoveInput(userInput)) {
           int row = alphabet.find(userInput[0]);
           int col = stoi(userInput.substr(1)) - 1;
           int position[2] = {row, col};
           vector<vector<int> > flip_tiles = isValidMove(board, position, player_turn);
+          // if there are no tiles to flip, the move is invalid
           if (flip_tiles.empty()) {
               invalid_move_flag = 1;
+          // else, let the player make their move
           } else {
               makeMove(board, row, col, 1);
               flip_tiles.clear();
@@ -174,12 +187,13 @@ int main() {
       }
     }
     
-    // If no hotkeys have been pressed, and the input is a valid move, let the Bot make its move
+    // if no hotkeys have been pressed, and the input is a valid move, let the Bot make its move
     if(!save_flag && !load_flag && !hint_flag && !log_flag && !invalid_move_flag){
       if (skip_player_flag) {
         skip_player_flag = 0;
       }
       vector < vector<int> > botMoves = findAllPossibleMoves(board, 2);
+      // skip the bot's turn if it has no possible move
       if (!noPossibleMoves(botMoves)) {
           int bot_position[2] = { };
           botMove(board, bot_position, botMoves, 2);
@@ -194,8 +208,8 @@ int main() {
     }
   }
 
-  // Game Ends here
-  // Print out scoreboard and asks if player wants to replay again (?)
+  // Game Ends
+  // Prints out final scoreboard of Player and Bot scores, and whether there was a win/loss or draw
   system("clear");
   printFinalScore(board, player_turn);
 }
