@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iomanip>
 #include "interface.h"
+#include "othelloboard.h"
 
 using namespace std;
 string upper_left_corner = "\u2554";
@@ -36,12 +37,12 @@ void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hi
   cout << vertical << " \"p\" - view log of previous moves\n";
   cout << setw(40) << setfill('-') << "\n";
 
-  cout << "Player 1's Turn (Black). ";
+  cout << "Player's Turn (Black). ";
   if(show_hint_flag == 1){
-    cout << "Hints enabled for Player 1\n";
+    cout << "Hints enabled for Player\n";
   }
   else if(show_hint_flag == 0){
-    cout << "Hints disabled for Player 1\n";
+    cout << "Hints disabled for Player\n";
   }
 
   int white_counter = 0, black_counter = 0;
@@ -118,16 +119,18 @@ void printFinalScore(vector < vector<int> > board, int player_turn){
   cout << vertical << " FINAL SCORE " << vertical << "\n";
   cout << bottom_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << bottom_right_corner << "\n";
 
+  printBoard(board);
+
   if(player_turn == 1){
-    cout << "Player 1 - " << BLACK_UI << " points. Bot - " << WHITE_UI << " points.\n";
+    cout << "Player - " << BLACK_UI << " points. Bot - " << WHITE_UI << " points.\n";
     if(WHITE_UI > BLACK_UI){
-    cout << "Bot beat Player 1 by " << WHITE_UI - BLACK_UI << " points.\n";
+    cout << "Bot beat Player by " << WHITE_UI - BLACK_UI << " points.\n";
     }
     else if(BLACK_UI > WHITE_UI){
-      cout << "Player 1 beat the Bot by" << BLACK_UI - WHITE_UI << " points.\n";
+      cout << "Player beat the Bot by " << BLACK_UI - WHITE_UI << " points.\n";
     }
     else{
-      cout << "Player 1 and Bot tied.\n";
+      cout << "Player and Bot tied.\n";
     }
   }
 }

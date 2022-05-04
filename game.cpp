@@ -90,6 +90,13 @@ int main() {
   
   system("clear");
   while (boardEmpty(board)) {
+    hint_flag = 0;
+    if(show_hint_flag){
+      printPageWithHints(board, player_turn, show_hint_flag);
+    }
+    else{
+      printPage(board, player_turn, show_hint_flag);
+    }
 
     vector < vector<int> > player1moves = findAllPossibleMoves(board, 1);
     vector < vector<int> > botmoves = findAllPossibleMoves(board, 2);
@@ -104,13 +111,6 @@ int main() {
     }
 
     if (!skip_player_flag) {
-      hint_flag = 0;
-      if(show_hint_flag){
-        printPageWithHints(board, player_turn, show_hint_flag);
-      }
-      else{
-        printPage(board, player_turn, show_hint_flag);
-      }
 
       if(save_flag){
         cout << "File saved successfully\n";
@@ -188,7 +188,7 @@ int main() {
           bot_move[0] = bot_position[0];
           bot_move[1] = bot_position[1];
       } else {
-          cout << "No possible moves can be made by bot. Player's Turn" << endl;
+          cout << "No possible moves can be made by bot 1. Player's Turn" << endl;
       }
       botMoves.clear();
     }
