@@ -26,7 +26,7 @@ void printTitle(){
   cout << bottom_left_corner << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << horizontal << bottom_right_corner << "\n";
 }
 
-// Prints description of hotkeys, player turn, displays if hints are enabled/disabled
+// prints description of hotkeys, player turn, displays if hints are enabled/disabled
 // and tallies of total WHITE_UI and BLACK_UI pieces on the current board
 void printScoreBoard(vector < vector<int> > board, int player_turn, bool show_hint_flag){
   cout << vertical << " HOTKEYS:" << "\n";
@@ -98,6 +98,7 @@ void loadFile(vector < vector<int> > &board, int &player_turn){
   fin.close();
 }
 
+// counts the total pieces of the Player or the Bot
 int countTotalPieces(vector < vector<int> > board, int player) {
   int size = board.size();
   int counter = 0;
@@ -111,6 +112,8 @@ int countTotalPieces(vector < vector<int> > board, int player) {
   return counter;
 }
 
+// prints final scoreboard. Displays points of both players
+// and declares the winner, loser or if the game was a draw.
 void printFinalScore(vector < vector<int> > board, int player_turn){
   int WHITE_UI = countTotalPieces(board, 2);
   int BLACK_UI = countTotalPieces(board, 1);
@@ -134,9 +137,3 @@ void printFinalScore(vector < vector<int> > board, int player_turn){
     }
   }
 }
-
-  //cout << "Would you like to play again? (Y/N)\n";
-  //cin >> replay;
-  //while(replay != 'Y' && replay != 'N'){
-  //  cout >> "Invalid choice. Input 'Y' or 'N': ";
-  //}

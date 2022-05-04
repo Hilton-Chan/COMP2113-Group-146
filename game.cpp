@@ -14,9 +14,7 @@ using namespace std;
 
 const string alphabet = "ABCDEFGH";
 
-// True/false values should be swapped
-// Also, isdigit will always be false because we are passing a string?
-// Don't need .length(), as there won't be two digit numbers with 8x8 board
+// returns true if string passed is a string of numbers
 bool isNumber(string s) {
   for (int i=0; i<s.length(); i++) {
     if (isdigit(s[i]) == 0) {
@@ -26,13 +24,14 @@ bool isNumber(string s) {
   return 1;
 }
 
-
+// prints the scoreboard and the board
 void printPage(vector < vector<int> > board, int player, bool hint) {
   system("clear");
   printScoreBoard(board, player, hint);
   printBoard(board);
 }
 
+// prints the scoreboard and the board with hints
 void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
   system("clear");
   printScoreBoard(board, player, hint);
@@ -40,7 +39,7 @@ void printPageWithHints(vector < vector<int> > board, int player, bool hint) {
   showPossibleMoves(board, validMovesArr);
 }
 
-//Checks for valid move, with format A1 - H8
+// checks for valid move, with format A1 - H8
 bool validMoveInput(string input) {
   if (input.length() != 2) {
     return 0;
@@ -110,6 +109,7 @@ int main() {
       cout << "No possible moves can be made by Bot. Player's Turn" << endl;
     }
 
+    // skip the players turn if they have no possible move
     if (!skip_player_flag) {
 
       if(save_flag){
