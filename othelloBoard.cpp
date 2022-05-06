@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include <stdlib.h>
-#include "othelloboard.h"
+#include "othelloBoard.h"
 
 using namespace std;
 

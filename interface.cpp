@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iomanip>
 #include "interface.h"
-#include "othelloboard.h"
+#include "othelloBoard.h"
 
 using namespace std;
 string upper_left_corner = "\u2554";

@@ -7,7 +7,7 @@
 #include <fstream>
 #include "isValidMove.h"
 #include "listAllValidMoves.h"
-#include "othelloboard.h"
+#include "othelloBoard.h"
 #include "interface.h"
 
 using namespace std;
