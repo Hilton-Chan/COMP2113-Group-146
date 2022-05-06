@@ -85,7 +85,7 @@ int main() {
   bool skip_player_flag = 0;
   bool bot_flag = 0;
   int bot_move[2] ={};
-  string log = "\nPrevious player moves:\n";
+  string log = "\nPrevious player and bot moves:\n";
   int log_counter = 1;
   
   system("clear");
@@ -128,6 +128,7 @@ int main() {
       // display log of previous player moves, if hotkey was pressed
       if(log_flag){
         cout << log;
+        log_flag = 0;
       }
       // display text if user has inputted an invalid move
       if(invalid_move_flag){
@@ -138,6 +139,7 @@ int main() {
       else if(bot_flag){
         cout << "\nBot played " << alphabet[bot_move[0]] << bot_move[1] + 1 << "\n";
       }
+      cout << "Please input hotkey or next move:\n";
       string userInput;
       cin >> userInput;
 
@@ -149,6 +151,8 @@ int main() {
       } else if (userInput == "l") {
           loadFile(board, player_turn);
           load_flag = 1;
+          log = "Previous player and bot moves:\n";
+          log_counter = 1;
       // hotkey "h" - display hints on board
       } else if (userInput == "h" && show_hint_flag == 0) { // show move key
           show_hint_flag = 1;
@@ -177,8 +181,6 @@ int main() {
               log += to_string(log_counter) + ": Player played " + alphabet[row] + to_string(col + 1) + "\n";
               log_counter++;
               log_flag = 0;
-              printBoard(board);
-              cout << "\n";
           }
       } else {
         cout << "Invalid Input. Please input a move from A1 to H8:\n";
@@ -200,6 +202,8 @@ int main() {
           bot_flag = 1;
           bot_move[0] = bot_position[0];
           bot_move[1] = bot_position[1];
+          //adding bot move to log
+          log += string("   Bot played ") + alphabet[bot_move[0]] + to_string(bot_move[1] + 1) + "\n";
       } else {
           cout << "No possible moves can be made by bot 1. Player's Turn" << endl;
       }
