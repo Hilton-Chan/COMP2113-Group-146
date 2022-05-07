@@ -20,20 +20,21 @@ List of Features:
 
 Generation of random game sets or events
 
-  - Playing against a simple bot which chooses a random move out of possible playable moves
+  - Playing against a simple bot which responds to player moves by picking a random move out of its possible playable moves
   
 Data structures for storing game status
 
-  - Storing checkerboard state
+  - Board is stored as a nested vector
   
 Dynamic memory management
 
-  - Dynamically updating contents of array, when chess piece is put onto the checkerboard, other chess pieces are updated in the process as well
+  -When a piece is placed onto a valid position it is dynamically inserted into the board vector, and the contents of the board vector are also dynamically updated to account for the flipping of pieces
 
 File input/output (e.g., for loading/saving game status)
 
-  - Saving and loading game status
+  - Saving the board state into a gamefile.txt, and allowing the player to load their gamefile in the game menu or during the game
   
 Program codes in multiple files
 
   - Separating code files for fundamental Othello gameplay, graphics and bot programming
+  - Implementing hotkeys by calling functions in other code files. Namely: "s" for saving gamefile, "l" for loading gamefile, "h" for displaying/hiding hints and "p" for viewing a log o previous player and bot moves
