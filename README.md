@@ -4,7 +4,7 @@ Team Members: Chan Hilton Tsz Chau (3035740831), Lee Tin Long Donald (3035664714
 
 Game: Othello
 
-Description & Rules:
+## Description & Rules:
   - The player starts as black, and plays against a bot that plays as white
 
   - Black always makes the first move. Each turn, the player places one piece of their colour on the board, after which the bot then responds with its own move
@@ -20,7 +20,7 @@ Description & Rules:
   - The game is over when neither player nor bot has a legal move (i.e. a move that captures at least one opposing piece) or when the board is full
   
 
-List of Features:
+## List of Features:
 
 Generation of random game sets or events
 
