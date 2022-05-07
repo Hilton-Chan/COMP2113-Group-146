@@ -5,16 +5,19 @@ Team Members: Chan Hilton Tsz Chau (3035740831), Lee Tin Long Donald (3035664714
 Game: Othello
 
 Description & Rules:
+  - The player starts as black, and plays against a bot that plays as white
 
-  - Player's toss a coin to decide who will play first. Each turn, the player places one piece on the board with their colour facing up.
+  - Black always makes the first move. Each turn, the player places one piece of their colour on the board, after which the bot then responds with its own move
 
-  - For the first four moves, the players must play to one of the four squares in the middle of the board and no pieces are captured or reversed.
+  - The initial board state begins with 2 black pieces on D5 and E5, and 2 white pieces on E4 and D5
 
-  - Each piece played must be laid adjacent to an opponent's piece so that the opponent's piece or a row of opponent's pieces is flanked by the new piece and another piece of the player's colour. All of the opponent's pieces between these two pieces are 'captured' and turned over to match the player's colour.
+  - Each piece played must be laid adjacent to an opponent's piece so that the opponent's piece or a row of opponent's pieces is flanked by the new piece and another piece of the player's colour. All of the opponent's pieces between these two pieces are 'captured' and turned over to match the player's colour
 
-  - It can happen that a piece is played so that pieces or rows of pieces in more than one direction are trapped between the new piece played and other pieces of the same colour. In this case, all the pieces in all viable directions are turned over.
+  - It can happen that a piece is played so that pieces or rows of pieces in more than one direction are trapped between the new piece played and other pieces of the same colour. In this case, all the pieces in all viable directions are turned over
 
-  - The game is over when neither player has a legal move (i.e. a move that captures at least one opposing piece) or when the board is full.
+  - If the player or bot does not have a legal move on a given turn, they cannot do anything and so their turn is skipped
+  
+  - The game is over when neither player nor bot has a legal move (i.e. a move that captures at least one opposing piece) or when the board is full
   
 List of Features:
 
@@ -24,11 +27,11 @@ Generation of random game sets or events
   
 Data structures for storing game status
 
-  - Board is stored as a nested vector
+  - The board is stored as a nested vector
   
 Dynamic memory management
 
-  -When a piece is placed onto a valid position it is dynamically inserted into the board vector, and the contents of the board vector are also dynamically updated to account for the flipping of pieces
+  - When a piece is placed onto a valid position it is dynamically inserted into the board vector, and the contents of the board vector are also dynamically updated to account for the flipping of pieces
 
 File input/output (e.g., for loading/saving game status)
 
