@@ -19,6 +19,7 @@ Description & Rules:
   
   - The game is over when neither player nor bot has a legal move (i.e. a move that captures at least one opposing piece) or when the board is full
   
+
 List of Features:
 
 Generation of random game sets or events
