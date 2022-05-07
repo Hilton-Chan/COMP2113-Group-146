@@ -7,7 +7,7 @@ Game: Othello
 ## Description & Rules:
   - The player starts as black, and plays against a bot that plays as white
 
-  - Black always makes the first move. Each turn, the player places one piece of their colour on the board, after which the bot then responds with its own move
+  - Black always makes the first move of the game. Each turn, the player places one piece of their colour on the board, after which the bot then responds with its own move
 
   - The initial board state begins with 2 black pieces on D5 and E5, and 2 white pieces on E4 and D5
 
