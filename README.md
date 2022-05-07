@@ -36,7 +36,7 @@ Dynamic memory management
 
 File input/output (e.g., for loading/saving game status)
 
-  - Saving the board state into a gamefile.txt, and allowing the player to load their gamefile in the game menu or during the game
+  - Saving the board state into a gamefile.txt, and allowing the player to load their gamefile in the game menu or during the game. If no gamefile exists when loading the board state, the program immediately terminates and asks the player to restart the game
   
 Program codes in multiple files
 
