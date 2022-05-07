@@ -37,4 +37,4 @@ File input/output (e.g., for loading/saving game status)
 Program codes in multiple files
 
   - Separating code files for fundamental Othello gameplay, graphics and bot programming
-  - Implementing hotkeys by calling functions in other code files. Namely: "s" for saving gamefile, "l" for loading gamefile, "h" for displaying/hiding hints and "p" for viewing a log o previous player and bot moves
+  - Implementing hotkeys by calling functions in other code files. Namely: "s" for saving gamefile, "l" for loading gamefile, "h" for displaying/hiding hints and "p" for viewing a log of previous player and bot moves
