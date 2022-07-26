@@ -1,4 +1,4 @@
-# COMP2113-group146
+# COMP2113-Group146
 
 Team Members: Chan Hilton Tsz Chau (3035740831), Lee Tin Long Donald (3035664714)
 
